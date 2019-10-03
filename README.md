@@ -4,5 +4,5 @@ Data wrangling done with data.table
 
 ## to-do
 #### Lagged and rolling augmentation in one step w/o copies
-#### Gradient descent with prediction vs tslm()
+#### Make a Gradient descent with prediction and compare to tslm() with forecast method
    
