@@ -55,7 +55,7 @@ df2[, `:=`( (name_lag),
 end <- NROW(df)- (NROW(df2) - 
                   NROW(df2[!complete.cases(df2), ]))
 
-# only complete cases
+# only complete cases and cbind factors and y's to them
 df_data <- cbind(df[ -c(1:end), .SD, .SDcols = col_names %ni% name_vec(pat, col_names)$`^x|^y`], 
                   df2[complete.cases(df2), ])
 
@@ -107,14 +107,12 @@ while(i <= nrow(df_data)-window){
   
 }     
 
-
-mean_real<-sum_real/N_fit
-nrmse = (sqrt(sse/N_fit))/mean_real
-
+#mean_real<-sum_real/N_fit
+#nrmse = sqrt((sse/N_fit))/mean_real
+nrmse = `/`(sqrt(`*`(sse,N_fit)),sum_real)
 cat("Median R-sq across all folds:", sapply(Rsq, FUN = median),"\n",
     "Normalised RMSE", nrmse)
 
-
-# saveand load workspace .Rdata
+# save and load workspace .Rdata
 #save.image(file = "cv_lm6.Rdata")
 #load("~/Desktop/cv_lm6.Rdata")
